@@ -131,27 +131,35 @@ export default function Navbar() {
                         </div>
                       ))}
                     </div>
+
                     {category.sections.map((section) => (
                       <div key={section.name}>
                         <p
-                          id={`${category.id}-${section.id}-heading-mobile`}
+                          id={`${category.name}-heading-mobile`}
                           className="font-medium text-gray-900"
                         >
                           {section.name}
                         </p>
                         <ul
                           role="list"
-                          aria-labelledby={`${category.id}-${section.id}-heading-mobile`}
+                          aria-labelledby={`${category.name}-heading-mobile`}
                           className="mt-6 flex flex-col space-y-6"
                         >
                           {section.items.map((item) => (
                             <li key={item.name} className="flow-root">
-                              <Link
-                                to={item.to}
-                                className="-m-2 block p-2 text-gray-500"
+                              <p
+                                onClick={() =>
+                                  handleCategoryClick(
+                                    category,
+                                    section,
+                                    item,
+                                    close
+                                  )
+                                }
+                                className="hover:text-gray-800 cursor-pointer"
                               >
                                 {item.name}
-                              </Link>
+                              </p>
                             </li>
                           ))}
                         </ul>
