@@ -90,25 +90,11 @@ export default function Navbar() {
             {/* Links */}
             <TabGroup className="mt-2">
               <div className="border-b border-gray-200">
-                {/* <TabList className="-mb-px flex space-x-8 px-4">
-                  {navigation.categories?.map((category) => (
-                    <Tab
-                      key={category.name}
-                      className="flex-1 border-b-2 border-transparent px-1 py-4 text-base font-medium whitespace-nowrap text-gray-900 data-selected:border-indigo-600 data-selected:text-indigo-600"
-                    >
-                      {category.name}
-                    </Tab>
-                  )) || null}
-                </TabList> */}
                 <TabList className="-mb-px flex space-x-8 px-4">
                   {navigation.categories?.map((category) => (
                     <Tab
                       key={category.name}
                       className="flex-1 border-b-2 border-transparent px-1 py-4 text-base font-medium whitespace-nowrap text-gray-900 data-selected:border-indigo-600 data-selected:text-indigo-600"
-                      onClick={() => {
-                        navigate(`/${category.id}`); // Navigate to category URL
-                        setOpen(false); // Close mobile menu
-                      }}
                     >
                       {category.name}
                     </Tab>
