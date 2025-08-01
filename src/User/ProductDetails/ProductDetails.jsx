@@ -62,7 +62,7 @@ export default function ProductDetails() {
           navigate("/cart"); // Navigate only after fresh cart is fetched
         });
       } else {
-        alert(result.payload?.message || "Failed to add item to cart");
+        alert(result.payload?.message || "Failed to add item to cart ");
       }
     });
   };

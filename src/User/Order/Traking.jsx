@@ -1,6 +1,6 @@
 // src/components/TrackStepper.jsx
 import React, { memo } from "react";
-import { stepsData } from "./data";
+import { stepsData } from "./Data";
 
 const CheckSVG = memo(() => (
   <svg

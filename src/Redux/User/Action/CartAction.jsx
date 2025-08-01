@@ -23,7 +23,7 @@ export const addItemtoCart = createAsyncThunk(
       const errorMessage =
         err.response?.data?.error || // Backend sends 'error' field
         err.response?.data?.message ||
-        "Failed to add item to cart";
+        "Failed to add item to cart PLEASE LOGIN";
       return rejectWithValue({ message: errorMessage });
     }
   }

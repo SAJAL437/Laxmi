@@ -53,10 +53,10 @@ const ProductCard = ({ product }) => {
         </p>
         <div className="flex justify-between items-center mt-1">
           <p className="text-base font-semibold text-gray-900">
-            ${product.discountedPrice}
+            ₹{product.discountedPrice}
             {product.discountPercent > 0 && (
               <span className="text-xs text-gray-500 line-through ml-1">
-                ${product.price}
+                ₹{product.price}
               </span>
             )}
           </p>
