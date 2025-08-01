@@ -224,7 +224,7 @@ export default function Navbar() {
                   <span className="sr-only">Your Company</span>
                   <img
                     alt="Your Company Logo"
-                    src="/public/logo.png"
+                    src="/logo.png"
                     // src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600"
                     className="h-12 sm:h-14 w-auto "
                   />

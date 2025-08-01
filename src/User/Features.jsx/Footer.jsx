@@ -18,7 +18,7 @@ const Footer = () => {
               <span className="sr-only">Your Company</span>
               <img
                 alt="Your Company Logo"
-                src="/public/logo-Footer.png"
+                src="/logo-Footer.png"
                 className="h-12 sm:h-14 w-auto "
               />
             </Link>
