@@ -4,7 +4,7 @@ import { getToken } from "./Auth";
 const API_URL =
   import.meta.env.MODE === "development"
     ? "http://localhost:2512"
-    : "http://localhost:2512"; // Update to production URL if needed
+    : "laxmi-server-production-e9a4.up.railway.app"; // Update to production URL if needed
 
 const axiosInstance = axios.create({
   baseURL: API_URL,

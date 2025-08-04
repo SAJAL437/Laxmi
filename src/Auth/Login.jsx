@@ -57,7 +57,12 @@ const Login = () => {
     setErrors(newErrors);
   };
 
-  const BaseURL = "http://localhost:2512";
+  const BaseURL =
+    import.meta.env.MODE === "development"
+      ? "http://localhost:2512"
+      : "laxmi-server-production-e9a4.up.railway.app";
+
+  // const BaseURL = "http://localhost:2512";
 
   const handleSignIn = async (e) => {
     e.preventDefault();
