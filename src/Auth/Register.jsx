@@ -92,7 +92,7 @@ const Register = () => {
   const BaseURL =
     import.meta.env.MODE === "development"
       ? "http://localhost:2512"
-      : "laxmi-server-production-e9a4.up.railway.app";
+      : "laxmi-server-production-7c6e.up.railway.app";
   // const BaseURL = "http://localhost:2512";
 
   const handleSignUp = async (e) => {
