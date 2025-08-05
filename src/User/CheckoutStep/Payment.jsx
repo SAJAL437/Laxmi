@@ -8,13 +8,18 @@ import {
 } from "../../Redux/User/Action/CartAction";
 import { getToken } from "../../Utils/Auth";
 
-const Payment = ({ data, step }) => {
+const Payment = ({ data }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
   const [selectedMethod, setSelectedMethod] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState(null);
+
+  const API_URL =
+  import.meta.env.MODE === "development"
+    ? "http://localhost:2512"
+    : "https://laxmi-server-production-7c6e.up.railway.app";
 
   // Extract orderId from URL query parameters
   const query = new URLSearchParams(location.search);
@@ -68,7 +73,7 @@ const Payment = ({ data, step }) => {
       } else {
         console.log("Initiating Razorpay payment for orderId:", orderId);
         const response = await fetch(
-          `http://localhost:2512/api/users/payments/${orderId}`,
+          `${API_URL}/api/users/payments/${orderId}`,
           {
             method: "POST",
             headers: {

@@ -10,6 +10,10 @@ const PaymentCallback = () => {
   const { orderId } = useParams();
   const location = useLocation();
   const [error, setError] = useState(null);
+  const API_URL =
+    import.meta.env.MODE === "development"
+      ? "http://localhost:2512"
+      : "https://laxmi-server-production-7c6e.up.railway.app";
 
   // Extract query parameters
   const query = new URLSearchParams(location.search);
@@ -37,7 +41,10 @@ const PaymentCallback = () => {
 
       try {
         const jwt = getToken();
-        console.log("JWT Token:", jwt ? jwt.substring(0, 20) + "..." : "No JWT found");
+        console.log(
+          "JWT Token:",
+          jwt ? jwt.substring(0, 20) + "..." : "No JWT found"
+        );
         if (!jwt) {
           setError("Session expired. Please log in again.");
           console.log("Redirecting to login due to missing JWT");
@@ -46,9 +53,12 @@ const PaymentCallback = () => {
         }
 
         // Call backend to verify payment
-        console.log("Calling backend to verify payment with:", { paymentId, orderId });
+        console.log("Calling backend to verify payment with:", {
+          paymentId,
+          orderId,
+        });
         const response = await fetch(
-          `http://localhost:2512/api/users/payments/?razorpay_payment_id=${paymentId}&order_id=${orderId}`,
+          `${API_URL}/api/users/payments/?razorpay_payment_id=${paymentId}&order_id=${orderId}`,
           {
             method: "GET",
             headers: {
@@ -61,19 +71,26 @@ const PaymentCallback = () => {
         if (!response.ok) {
           const errorText = await response.text();
           console.log("Payment verification error response:", errorText);
-          throw new Error(`Payment verification failed: ${response.status} ${errorText}`);
+          throw new Error(
+            `Payment verification failed: ${response.status} ${errorText}`
+          );
         }
 
         const paymentResponse = await response.json();
         console.log("Payment verification response:", paymentResponse);
         if (paymentResponse.status) {
-          console.log("Payment verified successfully, navigating to confirmation");
+          console.log(
+            "Payment verified successfully, navigating to confirmation"
+          );
           // Refetch cart to reflect cleared state
           await dispatch(fetchCart());
           // Navigate to confirmation page
           navigate(`/checkout/confirmation?orderId=${orderId}`);
         } else {
-          setError(paymentResponse.message || "Payment not confirmed. Please try again.");
+          setError(
+            paymentResponse.message ||
+              "Payment not confirmed. Please try again."
+          );
           console.log("Payment not confirmed:", paymentResponse);
         }
       } catch (err) {
@@ -83,11 +100,13 @@ const PaymentCallback = () => {
           console.log("Redirecting to login due to 401 error");
           navigate("/login");
         } else if (err.message.includes("404")) {
-          errorMessage = "Order not found. Please start the checkout process again.";
+          errorMessage =
+            "Order not found. Please start the checkout process again.";
           console.log("Redirecting to checkout/address due to 404 error");
           navigate("/checkout/address");
         } else {
-          errorMessage = err.message || "Failed to verify payment. Please try again.";
+          errorMessage =
+            err.message || "Failed to verify payment. Please try again.";
         }
         setError(errorMessage);
         console.error("PaymentCallback Error:", err);
@@ -109,7 +128,9 @@ const PaymentCallback = () => {
 
   return (
     <div className="container mx-auto px-4 py-6 max-w-5xl">
-      <p className="text-gray-600 text-center text-base">Verifying payment...</p>
+      <p className="text-gray-600 text-center text-base">
+        Verifying payment...
+      </p>
     </div>
   );
 };
