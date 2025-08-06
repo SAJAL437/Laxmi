@@ -62,7 +62,6 @@ export const navigation = {
         },
       ],
     },
-
     {
       id: "men",
       name: "Men",
@@ -129,8 +128,8 @@ export const navigation = {
     },
   ],
   pages: [
-    { name: "Company", to: "#" },
-    { name: "Stores", to: "#" },
+    { name: "Why Laxmi?", to: "/why-laxmi" },
+    { name: "Stores", to: "/stores" },
   ],
   role: [{ name: "AdminDasboard", to: "#" }],
 };
