@@ -87,7 +87,7 @@ const Contact = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="w-full md:w-1/2 h-[30rem] md:h-[35rem] flex items-center justify-center"
           >
-            <div className="relative w-full h-full">
+            <div className="relative w-full h-full mt-5 sm:mt-0">
               <img
                 src="/contact.png"
                 alt="Laxmi Fashion Contact"
