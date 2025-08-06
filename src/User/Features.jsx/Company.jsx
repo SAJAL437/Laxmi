@@ -74,7 +74,7 @@ const Company = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="w-full md:w-1/2 h-full flex items-center justify-center"
           >
-            <div className="relative w-full h-[25rem] md:h-[32rem] cursor-pointer transition-all duration-1000 animate-pulse-slow hover:scale-98 mt-5 sm:mt-0">
+            <div className="relative w-full h-[25rem] md:h-[32rem] cursor-pointer transition-all duration-1000 animate-pulse-slow hover:scale-98 my-5 sm:my-0">
               <img
                 src="/bg.png"
                 alt="Laxmi Fashion Showcase"
