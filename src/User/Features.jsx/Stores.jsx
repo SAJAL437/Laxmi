@@ -1,9 +1,16 @@
-import React from "react";
+import React, { use } from "react";
 import { motion } from "framer-motion";
 import Navbar from "./Navbar";
 import { IoIosArrowDropupCircle } from "react-icons/io";
+import { useNavigate } from "react-router-dom";
 
 const Stores = () => {
+  const navigate =useNavigate();
+  const handleContact = () => {
+    navigate("/contact");
+    window.location.href = "/contact";
+  };
+
   const stores = [
     {
       name: "Laxmi Fashion Hub - Mumbai",
@@ -158,15 +165,15 @@ const Stores = () => {
           <p className="text-lg text-gray-700 max-w-2xl mx-auto leading-relaxed">
             Curious about our collections or store experiences? Connect with our team to dive into the artistry of Laxmi fashion.
           </p>
-          <motion.a
+          <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            href="/contact"
+            onClick={handleContact}
             className="mt-8 inline-block px-8 py-3 rounded-full font-semibold text-sm sm:text-base bg-gradient-to-r from-gray-950 to-gray-700 text-gray-100 cursor-pointer hover:from-gray-800 hover:to-gray-500 transition-all duration-300 shadow-lg animate-pulse-slow"
             aria-label="Contact us"
           >
             Contact Us
-          </motion.a>
+          </motion.button>
         </motion.div>
       </section>
 
