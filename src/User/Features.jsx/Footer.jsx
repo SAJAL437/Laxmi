@@ -117,7 +117,7 @@ const Footer = () => {
 
       {/* Divider */}
       <div className="border-t border-white/10 mt-10 pt-6 text-center text-sm text-gray-400">
-        © {new Date().getFullYear()} MyBrand. All rights reserved.
+        © {new Date().getFullYear()} LAXMI. All rights reserved.
       </div>
     </footer>
   );
