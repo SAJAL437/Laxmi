@@ -19,7 +19,7 @@ const Payment = ({ data }) => {
   const API_URL =
   import.meta.env.MODE === "development"
     ? "http://localhost:2512"
-    : "https://laxmi-server-production-7c6e.up.railway.app";
+    : "https://laxmi-server-production.up.railway.app";
 
   // Extract orderId from URL query parameters
   const query = new URLSearchParams(location.search);
