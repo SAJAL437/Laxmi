@@ -7,7 +7,7 @@ const VerifyOTP = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    contact: location.state?.contact || "", // Pre-fill from Register
+    contact: location.state?.contact || "",
     otp: "",
   });
   const [message, setMessage] = useState("");
@@ -17,7 +17,6 @@ const VerifyOTP = () => {
   const [errors, setErrors] = useState({});
 
   useEffect(() => {
-    // Validate contact on mount if pre-filled
     if (formData.contact) {
       const newErrors = { ...errors };
       if (!formData.contact.trim()) {
@@ -60,7 +59,6 @@ const VerifyOTP = () => {
       [name]: value,
     }));
 
-    // Real-time validation
     const newErrors = { ...errors };
     if (name === "contact") {
       if (!value.trim()) newErrors.contact = "Email or Phone is required";
@@ -80,7 +78,10 @@ const VerifyOTP = () => {
     setErrors(newErrors);
   };
 
-  const BaseURL = "http://localhost:2512";
+  const BaseURL =
+    import.meta.env.MODE === "development"
+      ? "http://localhost:2512"
+      : "https://laxmi-server-production.up.railway.app";
 
   const handleVerifyOTP = async (e) => {
     e.preventDefault();
@@ -98,48 +99,59 @@ const VerifyOTP = () => {
             contact: formData.contact,
             otp: formData.otp,
           },
+          timeout: 10000, // 10-second timeout for production stability
         }
       );
 
-      // Check if response contains token and save it
-      if (response.data.token) {
-        saveToken(response.data.token);
-        console.log("Token saved to localStorage:", response.data.token);
+      console.log("Verify OTP Response:", response.data); // Debug log
 
-        // Get user roles from the token
-        const roles = getUserRoles();
-        console.log("User roles:", roles);
+      // Check for successful response
+      if (response.data && response.status === 200) {
+        if (response.data.token) {
+          saveToken(response.data.token);
+          console.log("Token saved to localStorage:", response.data.token);
 
-        // Navigate based on role
-        if (roles.includes("ROLE_ADMIN")) {
-          navigate("/role_admin");
-        } else if (roles.includes("ROLE_USER")) {
-          navigate("/");
+          const roles = getUserRoles();
+          console.log("User roles:", roles);
+
+          // Navigate based on role
+          if (roles.includes("ROLE_ADMIN")) {
+            navigate("/role_admin");
+          } else if (roles.includes("ROLE_USER")) {
+            navigate("/");
+          } else {
+            navigate("/");
+            setError("No valid role found in token");
+            setLoading(false);
+            return;
+          }
+
+          // Set success message only after successful navigation
+          setMessage(
+            response.data.message ||
+              "OTP verified successfully! Welcome to the shop."
+          );
         } else {
-          navigate("/"); // Fallback if no recognized role
-          setError("No valid role found in token");
+          setError("No token received from server");
         }
       } else {
-        console.warn("No token received in response:", response.data);
-        setError("No token received from server");
+        setError(response.data.message || "OTP verification failed");
       }
-
-      setMessage(
-        response.data.message || "OTP verified successfully! Welcome to the shop."
-      );
     } catch (err) {
       let errorMsg = "OTP verification failed";
       if (err.code === "ERR_NETWORK") {
         errorMsg =
-          "Cannot connect to the server. Please ensure the backend is running.";
+          "Cannot connect to the server. Please check your network or try again later.";
       } else if (err.response) {
         if (err.response.status === 403) {
-          errorMsg = "Access forbidden: Please check server configuration.";
-        } else {
+          errorMsg = "Access forbidden: Invalid OTP or server issue.";
+        } else if (err.response.status === 400) {
           errorMsg = err.response.data.message || "Invalid OTP or contact";
+        } else {
+          errorMsg = err.response.data.message || "An unexpected error occurred";
         }
       } else {
-        errorMsg = err.message;
+        errorMsg = err.message || "An unexpected error occurred";
       }
       setError(errorMsg);
       console.error("Error:", err.response?.data || err);
@@ -163,9 +175,16 @@ const VerifyOTP = () => {
     setResendLoading(true);
 
     try {
-      const response = await axios.post(`${BaseURL}/auth/resend-otp`, {
-        contact: formData.contact,
-      });
+      const response = await axios.post(
+        `${BaseURL}/auth/resend-otp`,
+        {
+          contact: formData.contact,
+        },
+        {
+          timeout: 10000, // 10-second timeout
+        }
+      );
+      console.log("Resend OTP Response:", response.data); // Debug log
       setMessage(
         response.data?.message ||
           "OTP resent successfully! Check your email or phone."
@@ -174,14 +193,14 @@ const VerifyOTP = () => {
       let errorMsg = "Failed to resend OTP";
       if (err.code === "ERR_NETWORK") {
         errorMsg =
-          "Cannot connect to the server. Please ensure the backend is running.";
+          "Cannot connect to the server. Please check your network or try again later.";
       } else if (err.response) {
         errorMsg = err.response.data?.message || err.response.statusText;
       } else {
         errorMsg = err.message;
       }
       setError(errorMsg);
-      console.error("Error:", err);
+      console.error("Error:", err.response?.data || err);
     } finally {
       setResendLoading(false);
     }
