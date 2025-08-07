@@ -18,16 +18,16 @@ const Stepper = ({ steps = defaultSteps, activeStep }) => {
             <div
               className={`flex size-10 sm:size-12 items-center justify-center rounded-full border-2 bg-white transition-all duration-300 ease-in-out ${
                 activeStep >= step
-                  ? "border-indigo-600 bg-indigo-50"
+                  ? "border-gray-600 bg-gray-50"
                   : "border-gray-300"
               }`}
             >
               {activeStep > step ? (
-                <span className="text-indigo-600 text-lg sm:text-xl">✔</span>
+                <span className="text-gray-600 text-lg font-serif sm:text-xl">✔</span>
               ) : (
                 <span
                   className={`text-lg sm:text-xl ${
-                    activeStep === step ? "text-indigo-600" : "text-gray-500"
+                    activeStep === step ? "text-gray-600 font-serif" : "text-gray-500 font-serif"
                   }`}
                 >
                   {step}
@@ -36,8 +36,8 @@ const Stepper = ({ steps = defaultSteps, activeStep }) => {
             </div>
             <div className="absolute top-12 sm:top-16 left-1/2 -translate-x-1/2 text-center w-max">
               <span
-                className={`text-xs sm:text-sm font-medium ${
-                  activeStep >= step ? "text-indigo-600" : "text-gray-500"
+                className={`text-xs sm:text-sm font-semibold font-serif ${
+                  activeStep >= step ? "text-gray-600" : "text-gray-500"
                 }`}
               >
                 {label}
@@ -46,7 +46,7 @@ const Stepper = ({ steps = defaultSteps, activeStep }) => {
           </div>
         ))}
         <div
-          className="absolute top-1/2 left-0 h-1 bg-gradient-to-r from-indigo-600 to-cyan-500 transition-all duration-300 ease-in-out -translate-y-1/2"
+          className="absolute top-1/2 left-0 h-1 bg-gradient-to-r from-gray-900 to-gray-400 transition-all duration-300 ease-in-out -translate-y-1/2"
           style={{ width: progressWidth }}
         ></div>
       </div>

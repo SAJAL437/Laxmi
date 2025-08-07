@@ -72,7 +72,7 @@ const CartItem = ({ item }) => {
               onClick={() => handleUpdateItem(-1)}
               disabled={item?.quantity <= 1}
               sx={{
-                color: item?.quantity <= 1 ? "gray.300" : "#4f46e5",
+                color: item?.quantity <= 1 ? "gray.300" : "black",
                 "&:hover": { bgcolor: "gray.100" },
               }}
               className="transition-colors duration-200"
@@ -85,7 +85,7 @@ const CartItem = ({ item }) => {
             <IconButton
               onClick={() => handleUpdateItem(1)}
               sx={{
-                color: "#4f46e5",
+                color: "black",
                 "&:hover": { bgcolor: "gray.100" },
               }}
               className="transition-colors duration-200"
@@ -95,18 +95,12 @@ const CartItem = ({ item }) => {
           </div>
 
           {/* Remove Button */}
-          <Button
-            sx={{
-              color: "#4f46e5",
-              fontWeight: 500,
-              textTransform: "none",
-              "&:hover": { color: "#4338ca", bgcolor: "gray.100" },
-            }}
-            className="transition-colors duration-200"
+          <button
+            className=" bg-gradient-to-r p-1 px-2 from-gray-950 to-gray-700 text-gray-100 cursor-pointer hover:from-gray-800 hover:to-gray-500 transition-all duration-300 text-sm rounded-lg font-bold shadow-lg"
             onClick={handleRemoveItem}
           >
             Remove
-          </Button>
+          </button>
         </div>
       </div>
     </div>

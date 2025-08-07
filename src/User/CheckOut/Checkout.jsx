@@ -78,7 +78,7 @@ const Checkout = () => {
           )}
           {orderId && ActiveComponent && !loading && !error && (
             <div className="text-gray-700">
-              <h2 className="text-lg sm:text-xl font-semibold text-indigo-600 mb-4">
+              <h2 className="text-lg sm:text-xl font-semibold text-gary-600 mb-4">
                 {/* {steps.find((s) => s.step === activeStep)?.label} Details */}
               </h2>
               <ActiveComponent
@@ -89,7 +89,7 @@ const Checkout = () => {
           )}
           {activeStep === 1 && ActiveComponent && !loading && !error && (
             <div className="text-gray-700">
-              <h2 className="text-lg sm:text-xl font-semibold text-indigo-600 mb-4">
+              <h2 className="text-lg sm:text-xl font-semibold text-gary-600 mb-4">
                 {/* Address Details */}
               </h2>
               <ActiveComponent data={stepData?.data} step={activeStep} />

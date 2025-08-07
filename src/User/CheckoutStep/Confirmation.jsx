@@ -30,7 +30,7 @@ const Confirmation = () => {
 
   return (
     <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6 max-w-5xl">
-      <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-6 text-center">
+      <h2 className="text-2xl sm:text-3xl font-bold font-serif text-gray-800 mb-6 text-center">
         Order Confirmed
       </h2>
 
@@ -73,7 +73,7 @@ const Confirmation = () => {
               />
             </svg>
           </div>
-          <h3 className="text-lg sm:text-xl font-semibold text-gray-800 mb-2">
+          <h3 className="text-lg sm:text-xl font-semibold font-serif text-gray-800 mb-2">
             Thank you for your order!
           </h3>
           <p className="text-sm sm:text-base text-gray-600 mb-4">
@@ -88,13 +88,13 @@ const Confirmation = () => {
           <div className="flex justify-center item-center gap-5">
             <button
               onClick={handleContinueShopping}
-              className="w-full sm:w-auto sm:min-w-[200px] rounded-md bg-indigo-600 px-6 py-3 text-white text-sm sm:text-base font-medium hover:bg-indigo-700 transition duration-200"
+              className="w-full sm:w-auto sm:min-w-[200px] rounded-md bg-gradient-to-r from-gray-950 to-gray-700 text-gray-100 cursor-pointer hover:from-gray-800 hover:to-gray-500 transition-all duration-300 shadow-lg  px-6 py-3  text-sm sm:text-base font-semibold font-serif  "
             >
               Continue Shopping
             </button>
             <button
               onClick={handleOrder}
-              className="w-full sm:w-auto sm:min-w-[200px] rounded-md bg-indigo-600 px-6 py-3 text-white text-sm sm:text-base font-medium hover:bg-indigo-700 transition duration-200"
+              className="w-full sm:w-auto sm:min-w-[200px] rounded-md bg-gradient-to-r from-gray-950 to-gray-700 text-gray-100 cursor-pointer hover:from-gray-800 hover:to-gray-500 transition-all duration-300 shadow-lg bg-indigo-600 px-6 py-3  text-sm sm:text-base font-semibold font-serif"
             >
               Order
             </button>

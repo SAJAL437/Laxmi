@@ -270,7 +270,7 @@ export default function ProductDetails() {
                   <p className="opacity-50 text-sm">
                     {product.numRatings} Rating
                   </p>
-                  <p className="ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500">
+                  <p className="ml-3 text-sm font-medium text-gray-600 hover:text-gray-500 cursor-pointer">
                     {product.reviews?.length || 0} reviews
                   </p>
                 </div>
@@ -298,14 +298,14 @@ export default function ProductDetails() {
                             size.quantity > 0
                               ? "cursor-pointer bg-white text-gray-900 shadow-xs"
                               : "cursor-not-allowed bg-gray-50 text-gray-200",
-                            "group relative flex items-center justify-center rounded-md border px-4 py-3 text-sm font-medium uppercase hover:bg-gray-50 focus:outline-hidden data-focus:ring-2 data-focus:ring-indigo-500 sm:flex-1 sm:py-6"
+                            "group relative flex items-center justify-center rounded-md border px-4 py-3 text-sm font-medium uppercase hover:bg-gray-50 focus:outline-hidden data-focus:ring-2 data-focus:ring-gray-500 sm:flex-1 sm:py-6"
                           )}
                         >
                           <span>{size.name}</span>
                           {size.quantity > 0 ? (
                             <span
                               aria-hidden="true"
-                              className="pointer-events-none absolute -inset-px rounded-md border-2 border-transparent group-data-checked:border-indigo-500 group-data-focus:border"
+                              className="pointer-events-none absolute -inset-px rounded-md border-2 border-transparent group-data-checked:border-gray-500 group-data-focus:border"
                             />
                           ) : (
                             <span
@@ -337,6 +337,7 @@ export default function ProductDetails() {
                   type="submit"
                   variant="contained"
                   sx={{ px: "1rem", py: "0.5rem", bgcolor: "#9155fd" }}
+                  className="bg-gradient-to-r from-gray-950 to-gray-700 text-gray-100 cursor-pointer hover:from-gray-800 hover:to-gray-500 transition-all duration-300 shadow-lg"
                 >
                   Add to Cart
                   <span className="ml-2 text-xs font-medium text-white">

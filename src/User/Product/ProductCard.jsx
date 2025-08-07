@@ -62,7 +62,7 @@ const ProductCard = ({ product }) => {
           </p>
           <button
             onClick={(e) => e.stopPropagation()}
-            className="text-indigo-600 hover:text-indigo-800 transition-colors duration-200"
+            className="  text-gradient-to-r from-gray-950 to-gray-700  cursor-pointer hover:from-gray-800 hover:to-gray-500 transition-all duration-300 shadow-lg"
             aria-label="Add to cart"
           >
             <MdShoppingCart size={16} />
@@ -72,7 +72,7 @@ const ProductCard = ({ product }) => {
 
       {/* Discount Badge */}
       {product.discountPercent > 0 && (
-        <div className="absolute top-1 left-1 bg-indigo-600 text-white text-[10px] font-medium px-1.5 py-0.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+        <div className="absolute top-1 left-1  text-[10px] font-medium px-1.5 py-0.5 rounded-full opacity-0 group-hover:opacity-100 bg-gradient-to-r from-gray-950 to-gray-700 text-gray-100 cursor-pointer hover:from-gray-800 hover:to-gray-500 transition-all duration-300 shadow-lg">
           {product.discountPercent}% Off
         </div>
       )}

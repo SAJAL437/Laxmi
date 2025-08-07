@@ -108,7 +108,7 @@ const Address = ({ data, step }) => {
       {/* Address Details */}
       <div className="flex justify-center items-start w-full lg:w-1/2 bg-white rounded-2xl shadow-lg p-4 sm:p-6">
         <div className="text-sm sm:text-base text-gray-700 w-full">
-          <h3 className="text-base sm:text-lg font-bold text-indigo-600 mb-4">
+          <h3 className="text-base sm:text-lg font-bold font-serif text-gray-600 mb-4">
             Address Information
           </h3>
           {loading && (
@@ -130,7 +130,7 @@ const Address = ({ data, step }) => {
                   <button
                     onClick={() => handleNavigate(addr.id)}
                     disabled={isSubmitting}
-                    className="mt-2 w-full rounded-md bg-indigo-600 px-4 py-2 text-white text-sm sm:text-base font-medium hover:bg-indigo-700 disabled:bg-gray-300 disabled:text-gray-500 transition duration-200"
+                    className="mt-2 w-full rounded-md bg-indigo-600 px-4 py-2 text-sm sm:text-base font-semibold hover:bg-indigo-700 bg-gradient-to-r from-gray-950 to-gray-700 text-gray-100 cursor-pointer  font-serif hover:from-gray-800 hover:to-gray-500 transition-all duration-300 shadow-lg"
                   >
                     {isSubmitting ? "Processing..." : "Proceed to Summary"}
                   </button>
@@ -143,7 +143,7 @@ const Address = ({ data, step }) => {
               <button
                 onClick={() => handleNavigate(data.id)}
                 disabled={isSubmitting}
-                className="mt-2 w-full rounded-md bg-indigo-600 px-4 py-2 text-white text-sm sm:text-base font-medium hover:bg-indigo-700 disabled:bg-gray-300 disabled:text-gray-500 transition duration-200"
+                className="mt-2 w-full rounded-md  px-4 py-2 text-sm sm:text-base font-semibold bg-indigo-600 bg-gradient-to-r from-gray-950 to-gray-700 text-gray-100 cursor-pointer hover:from-gray-800 font-serif hover:to-gray-500 transition-all duration-300 shadow-lg   "
               >
                 {isSubmitting ? "Processing..." : "Proceed to Summary"}
               </button>
@@ -160,7 +160,7 @@ const Address = ({ data, step }) => {
       {/* Address Form */}
       <div className="flex justify-center items-center w-full lg:w-1/2 bg-white rounded-2xl shadow-lg p-4 sm:p-6">
         <form onSubmit={handleSubmit} className="w-full space-y-4">
-          <h3 className="text-base sm:text-lg font-bold text-indigo-600 mb-4">
+          <h3 className="text-base sm:text-lg font-bold font-serif text-gray-600 mb-4">
             Enter Address
           </h3>
           {[
@@ -194,7 +194,7 @@ const Address = ({ data, step }) => {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="w-full rounded-md bg-indigo-600 px-4 py-2 text-white text-sm sm:text-base font-medium hover:bg-indigo-700 disabled:bg-gray-300 disabled:text-gray-500 transition duration-200"
+            className="w-full rounded-md bg-indigo-600 px-4 py-2 text-sm sm:text-base font-semibold hover:bg-indigo-700 bg-gradient-to-r from-gray-950 to-gray-700 text-gray-100 cursor-pointer hover:from-gray-800 hover:to-gray-500 transition-all duration-300 font-serif shadow-lg "
           >
             {isSubmitting ? "Saving..." : "Save Address"}
           </button>

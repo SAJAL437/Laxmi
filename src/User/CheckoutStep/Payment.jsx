@@ -123,7 +123,7 @@ const Payment = ({ data }) => {
 
   return (
     <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6 max-w-5xl">
-      <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-6 text-center sm:text-left">
+      <h2 className="text-2xl sm:text-3xl font-bold font-serif text-gray-800 mb-6 text-center sm:text-left">
         Payment Methods
       </h2>
 
@@ -139,9 +139,9 @@ const Payment = ({ data }) => {
             {paymentMethods.map((method, index) => (
               <div
                 key={index}
-                className={`w-1/2 rounded-lg p-4 flex border-b items-center gap-3 cursor-pointer transition-all duration-200 ${
+                className={`w-1/2 rounded-lg p-4 flex border-b mb-3 items-center gap-3 cursor-pointer transition-all duration-200 ${
                   selectedMethod === method
-                    ? "border-indigo-600 bg-indigo-50 shadow-md"
+                    ? "border-gray-600 bg-indigo-50 shadow-md"
                     : "border-gray-300 hover:shadow-md"
                 }`}
                 onClick={() => handleMethodSelect(method)}
@@ -151,7 +151,7 @@ const Payment = ({ data }) => {
                   name="paymentMethod"
                   checked={selectedMethod === method}
                   onChange={() => handleMethodSelect(method)}
-                  className="h-5 w-5 text-indigo-600 focus:ring-indigo-500"
+                  className="h-5 w-5 text-gray-600 focus:ring-gray-500"
                 />
                 <span className="text-sm sm:text-base font-medium text-gray-800">
                   {method}
@@ -170,7 +170,7 @@ const Payment = ({ data }) => {
         <button
           onClick={handleConfirmPayment}
           disabled={isSubmitting}
-          className="w-full sm:w-auto sm:min-w-[200px] rounded-md bg-indigo-600 px-6 py-3 text-white text-sm sm:text-base font-medium hover:bg-indigo-700 disabled:bg-gray-300 disabled:text-gray-500 transition duration-200"
+          className="w-full sm:w-auto sm:min-w-[200px] rounded-md px-6 py-3 text-sm sm:text-base font-semibold font-serif bg-gradient-to-r from-gray-950 to-gray-700 text-gray-100 cursor-pointer hover:from-gray-800 hover:to-gray-500 transition-all duration-300 shadow-lg disabled:bg-gray-300 disabled:text-gray-500 "
         >
           {isSubmitting ? (
             <span className="flex items-center justify-center">

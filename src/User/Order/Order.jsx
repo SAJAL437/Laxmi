@@ -130,10 +130,10 @@ const Order = () => {
       <div className="max-w-7xl mx-auto">
         {/* Order Summary Card */}
         <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-6 sm:p-8 mb-8 hover:shadow-xl transition-all duration-300 hover:border-blue-300">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">
+          <h2 className="text-2xl font-bold font-serif text-gray-900 mb-6">
             Order Summary
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 font-serif">
             <div>
               <p className="text-sm font-medium text-gray-600">Order Placed</p>
               <p className="text-lg font-semibold text-gray-900">
@@ -163,7 +163,7 @@ const Order = () => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Tracking Section */}
           <div className="lg:col-span-2">
-            <h2 className="text-2xl font-bold text-gray-900 mb-6">
+            <h2 className="text-2xl font-bold font-serif text-gray-900 mb-6">
               Order Tracking
             </h2>
             <TrackStepper orderStatus={order.orderStatus} />
@@ -171,7 +171,7 @@ const Order = () => {
 
           {/* Order History */}
           <div>
-            <h2 className="text-2xl font-bold text-gray-900 mb-6">
+            <h2 className="text-2xl font-bold font-serif text-gray-900 mb-6">
               Order History
             </h2>
             <div className="space-y-4 max-h-[400px] overflow-y-auto">
@@ -193,7 +193,7 @@ const Order = () => {
             </div>
             <button
               onClick={handleViewAllOrders}
-              className="w-full mt-4 px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full mt-4 px-4 py-2 text-sm font-semibold font-serif bg-gradient-to-r from-gray-950 to-gray-700 text-gray-100 cursor-pointer hover:from-gray-800 hover:to-gray-500 transition-all duration-300 shadow-lg   rounded-md  focus:outline-none focus:ring-2 focus:ring-gray-500"
               aria-label="View all orders"
             >
               View All Orders

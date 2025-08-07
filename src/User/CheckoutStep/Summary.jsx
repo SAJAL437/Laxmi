@@ -32,7 +32,7 @@ const Summary = ({ data }) => {
 
   return (
     <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6 max-w-5xl">
-      <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-6 text-center sm:text-left">
+      <h2 className="text-2xl sm:text-3xl font-bold font-serif text-gray-800 mb-6 text-center sm:text-left">
         Order Summary
       </h2>
 
@@ -56,7 +56,7 @@ const Summary = ({ data }) => {
       {order && (
         <div className="space-y-8">
           <div className="bg-white rounded-xl shadow-sm p-4 sm:p-6">
-            <h3 className="text-lg sm:text-xl font-semibold text-gray-800 mb-4">
+            <h3 className="text-lg sm:text-xl font-semibold font-serif text-gray-800 mb-4">
               Shipping Address
             </h3>
             {order.shippingAddress ? (
@@ -69,7 +69,7 @@ const Summary = ({ data }) => {
           </div>
 
           <div className="bg-white rounded-xl shadow-sm p-4 sm:p-6">
-            <h3 className="text-lg sm:text-xl font-semibold text-gray-800 mb-4">
+            <h3 className="text-lg sm:text-xl font-semibold font-serif text-gray-800 mb-4">
               Order Items
             </h3>
             {order.orderItems?.length > 0 ? (
@@ -110,7 +110,7 @@ const Summary = ({ data }) => {
           </div>
 
           <div className="bg-white rounded-xl shadow-sm p-4 sm:p-6">
-            <h3 className="text-lg sm:text-xl font-semibold text-gray-800 mb-4">
+            <h3 className="text-lg sm:text-xl font-semibold font-serif text-gray-800 mb-4">
               Pricing Summary
             </h3>
             <div className="space-y-2 text-sm sm:text-base">
@@ -139,7 +139,7 @@ const Summary = ({ data }) => {
 
           <button
             onClick={handleProceedToPayment}
-            className="mt-4 w-full sm:w-auto sm:min-w-[200px] rounded-md bg-indigo-600 px-6 py-3 text-white font-medium hover:bg-indigo-700 transition duration-200"
+            className="mt-4 w-full sm:w-auto sm:min-w-[200px] rounded-md px-6 py-3  font-semibold font-serif bg-gradient-to-r from-gray-950 to-gray-700 text-gray-100 cursor-pointer hover:from-gray-800 hover:to-gray-500 transition-all duration-300 shadow-lg "
             disabled={loading || !orderId}
           >
             Proceed to Payment

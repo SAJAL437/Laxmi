@@ -351,18 +351,18 @@ export default function Navbar() {
                     <div>
                       {loading ? (
                         <div className="inline-flex w-full justify-center gap-x-1.5 rounded-full bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-xs ring-1 ring-gray-300 ring-inset hover:bg-gray-50 cursor-pointer">
-                          Loading...
+                          ...
                         </div>
                       ) : error ? (
                         <div className="inline-flex w-full justify-center gap-x-1.5 rounded-full bg-white px-3 py-2 text-sm font-semibold text-red-600 shadow-xs ring-1 ring-gray-300 ring-inset hover:bg-gray-50 cursor-pointer">
                           {error === "Session expired. Please log in again." ? (
                             <Link to="/signin">Sign In</Link>
                           ) : (
-                            "Error"
+                            "?"
                           )}
                         </div>
                       ) : (
-                        <MenuButton className="inline-flex w-full justify-center gap-x-1.5 rounded-full bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-xs ring-1 ring-gray-300 ring-inset hover:bg-gray-50 cursor-pointer">
+                        <MenuButton className="inline-flex w-full justify-center gap-x-1.5 rounded-full bg-white px-3 py-2 text-sm font-semibold font-serif text-gray-900 shadow-xs ring-1 ring-gray-300 ring-inset hover:bg-gray-50 border cursor-pointer">
                           <div>{user?.name?.[0]?.toUpperCase() || "U"}</div>
                         </MenuButton>
                       )}

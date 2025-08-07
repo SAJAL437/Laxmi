@@ -80,7 +80,7 @@ const Cart = () => {
                   py: 1.5,
                   borderRadius: 2,
                 }}
-                className="w-full transition-colors duration-300"
+                className="w-full bg-gradient-to-r from-gray-950 to-gray-700 text-gray-100 cursor-pointer hover:from-gray-800 hover:to-gray-500 transition-all duration-300 shadow-lg"
               >
                 Proceed to Checkout
               </Button>

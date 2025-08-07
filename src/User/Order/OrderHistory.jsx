@@ -82,7 +82,7 @@ const OrderHistory = () => {
   return (
     <div className="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
       <div className="flex items-center justify-between mb-8">
-        <h2 className="text-3xl font-bold text-gray-900">Order History</h2>
+        <h2 className="text-3xl font-bold font-serif text-gray-900">Order History</h2>
       </div>
 
       {orders.length === 0 ? (
