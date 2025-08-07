@@ -42,8 +42,8 @@ const Company = () => {
       <Navbar />
 
       {/* Hero Section */}
-      <section className="relative bg-cover bg-center h-[40rem] overflow-hidden">
-        <div className="max-w-7xl mx-auto h-full flex flex-col md:flex-row items-center justify-between px-4 md:px-8 lg:px-16">
+      <section className="relative bg-cover bg-center h-[40rem] sm:h-[44rem] md:h-[40rem] overflow-hidden">
+        <div className="max-w-7xl mx-auto h-full flex flex-col md:flex-row items-center justify-between px-4 md:px-8 lg:px-16 mt-10 lg:mt-0">
           {/* Left Content */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
@@ -54,7 +54,7 @@ const Company = () => {
             <h1 className="text-4xl md:text-6xl font-extrabold font-serif mb-4 tracking-tight">
               Laxmi
             </h1>
-            <p className="text-lg md:text-xl max-w-lg mb-6 text-gray-400">
+            <p className="text-md md:text-xl max-w-lg mb-6 text-gray-400">
               Since 2015, Laxmi has woven India’s vibrant heritage into
               breathtaking fashion, blending artisanal craftsmanship with bold,
               contemporary elegance to inspire confidence and individuality
@@ -72,14 +72,13 @@ const Company = () => {
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="w-full md:w-1/2 h-full flex items-center justify-center"
+            className="w-full md:w-1/2 h-full flex items-center justify-center "
           >
-            <div className="relative w-full h-[25rem] md:h-[32rem] cursor-pointer transition-all duration-1000 animate-pulse-slow hover:scale-98 my-5 sm:my-0">
+            <div className="relative w-full h-[18rem] sm:h-[25rem]  md:h-[32rem] cursor-pointer transition-all duration-1000 animate-pulse-slow hover:scale-98 sm:mb-10 ">
               <img
                 src="/bg.png"
                 alt="Laxmi Fashion Showcase"
                 className="w-full h-full object-cover object-top rounded-xl  "
-                
               />
               <div className="absolute inset-0 bg-gradient-to-r from-transparent to-gray-900/30 rounded-xl" />
             </div>
@@ -182,7 +181,7 @@ const Company = () => {
       </section>
 
       {/* Milestones Section with Diagonal Ribbon Timeline */}
-      <section className="py-20 px-4 md:px-8 lg:px-16 bg-gradient-to-b from-indigo-50 to-purple-50 relative overflow-hidden">
+      <section className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 md:px-8 lg:px-16 bg-gradient-to-b from-indigo-50 to-purple-50 relative overflow-hidden">
         <div
           className="absolute inset-0 bg-cover bg-center opacity-10"
           style={{
@@ -195,7 +194,7 @@ const Company = () => {
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             transition={{ duration: 0.6 }}
-            className="text-3xl md:text-4xl font-semibold font-serif text-gray-800 text-center mb-12"
+            className="text-2xl sm:text-3xl md:text-4xl font-semibold font-serif text-gray-800 text-center mb-8 sm:mb-12"
           >
             Our Journey
           </motion.h2>
@@ -208,22 +207,22 @@ const Company = () => {
                 whileInView={{ opacity: 1, x: 0 }}
                 whileHover={{ rotate: index % 2 === 0 ? 3 : -3, scale: 1.05 }}
                 transition={{ duration: 0.5 }}
-                className={`mb-5 flex justify-between items-center w-full ${
-                  index % 2 === 0 ? "flex-row-reverse" : ""
+                className={`mb-6 sm:mb-8 flex flex-col sm:flex-row justify-between items-center w-full ${
+                  index % 2 === 0 ? "sm:flex-row-reverse" : ""
                 }`}
               >
-                <div className="w-5/12"></div>
-                <div className="w-2/12 flex justify-center">
-                  <div className="w-10 h-10 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-full flex items-center justify-center text-xl ring-4 ring-indigo-100">
+                <div className="w-full sm:w-5/12 mb-4 sm:mb-0"></div>
+                <div className="w-full sm:w-2/12 flex justify-center">
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-full flex items-center justify-center text-lg sm:text-xl ring-4 ring-indigo-100">
                     {milestone.icon}
                   </div>
                 </div>
-                <div className="w-5/12">
-                  <div className="bg-white/80 backdrop-blur-md p-6 rounded-xl shadow-lg border border-indigo-100">
-                    <h3 className="text-lg font-semibold font-serif text-gray-800">
+                <div className="w-full sm:w-5/12">
+                  <div className="bg-white/80 backdrop-blur-md p-4 sm:p-6 rounded-xl shadow-lg border border-indigo-100">
+                    <h3 className="text-base sm:text-lg font-semibold font-serif text-gray-800">
                       {milestone.year}
                     </h3>
-                    <p className="text-gray-600 mt-2 leading-relaxed">
+                    <p className="text-gray-600 mt-2 text-sm sm:text-base leading-relaxed">
                       {milestone.event}
                     </p>
                   </div>
@@ -385,7 +384,7 @@ const Company = () => {
       {/* Back to Top Button */}
       <button
         onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-        className="fixed bottom-16 right-4 bg-indigo-600 p-2 shadow-lg hover:bg-indigo-700 transform hover:scale-110 rounded-2xl font-bold text-sm sm:text-base bg-gradient-to-r from-gray-950 to-gray-700 text-gray-100 cursor-pointer hover:from-gray-800 hover:to-gray-500 transition-all duration-300 animate-pulse-slow"
+        className="fixed bottom-16 z-10 right-4 bg-indigo-600 p-2 shadow-lg hover:bg-indigo-700 transform hover:scale-110 rounded-2xl font-bold text-sm sm:text-base bg-gradient-to-r from-gray-950 to-gray-700 text-gray-100 cursor-pointer hover:from-gray-800 hover:to-gray-500 transition-all duration-300 animate-pulse-slow"
       >
         <IoIosArrowDropupCircle size={30} />
       </button>

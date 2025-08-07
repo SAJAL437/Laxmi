@@ -5,7 +5,7 @@ import { IoIosArrowDropupCircle } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 
 const Stores = () => {
-  const navigate =useNavigate();
+  const navigate = useNavigate();
   const handleContact = () => {
     navigate("/contact");
     window.location.href = "/contact";
@@ -49,24 +49,25 @@ const Stores = () => {
       <Navbar />
 
       {/* Hero Section */}
-      <section className="relative bg-cover bg-center h-[40rem] overflow-hidden">
-        <div className="max-w-7xl mx-auto h-full flex flex-col md:flex-row items-center justify-between px-4 md:px-8 lg:px-16">
+      <section className="relative bg-cover bg-center md:h-[44rem] overflow-hidden pb-4">
+        <div className="max-w-7xl mx-auto h-full flex flex-col md:flex-row items-center justify-between px-4 md:px-8 lg:px-16 mt-10 md:mt-0 ">
           {/* Left Content */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
-            className="w-full md:w-1/2 text-left text-gray-900 z-10"
+            className="w-full md:w-1/2 text-left text-gray-900 z-10 px-2"
           >
             <h1 className="text-4xl md:text-6xl font-extrabold mb-4 tracking-tight drop-shadow-md font-serif">
               Discover Our Stores
             </h1>
-            <p className="text-lg md:text-xl max-w-lg mb-6 drop-shadow-md text-gray-400">
-              Step into Laxmi’s world, where heritage meets haute couture. Visit our boutiques for an unforgettable fashion experience.
+            <p className="text-md md:text-xl max-w-lg mb-6 drop-shadow-md text-gray-400">
+              Step into Laxmi’s world, where heritage meets haute couture. Visit
+              our boutiques for an unforgettable fashion experience.
             </p>
             <a
               href="/stores"
-              className="inline-block px-8 py-3 rounded-full font-semibold text-sm sm:text-base bg-gradient-to-r from-gray-950 to-gray-700 text-gray-100 cursor-pointer hover:from-gray-800 hover:to-gray-500 transition-all duration-300 transform hover:scale-105 shadow-lg"
+              className="inline-block px-8 py-3 rounded-2xl font-semibold text-sm sm:text-base bg-gradient-to-r from-gray-950 to-gray-700 text-gray-100 cursor-pointer hover:from-gray-800 hover:to-gray-500 transition-all duration-300 transform hover:scale-105 shadow-lg"
               aria-label="Explore our stores"
             >
               Explore Stores
@@ -77,14 +78,13 @@ const Stores = () => {
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="w-full md:w-1/2 h-[30rem] md:h-[38rem] flex items-center justify-center "
+            className="w-full md:w-1/2 sm:h-[28rem] md:h-[32rem] lg:h-[43rem] hidden md:flex items-center justify-center pb-10 sm:pb-0"
           >
-            <div className="relative w-full h-full my-5 sm:my-0">
+            <div className="relative w-full h-full">
               <img
                 src="/store.png"
                 alt="Laxmi Store Showcase"
-                className="w-full h-full object-cover object-top rounded-2xl "
-                
+                className="w-full h-full object-cover object-top rounded-2xl"
               />
               <div className="absolute inset-0 bg-gradient-to-r from-transparent to-indigo-900/40 rounded-2xl" />
             </div>
@@ -107,7 +107,11 @@ const Stores = () => {
             {stores.map((store, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 20, rotate: index % 2 === 0 ? 2 : -2 }}
+                initial={{
+                  opacity: 0,
+                  y: 20,
+                  rotate: index % 2 === 0 ? 2 : -2,
+                }}
                 whileInView={{ opacity: 9, y: 0, rotate: 0 }}
                 whileHover={{ scale: 1.03, rotate: index % 2 === 0 ? 1 : -1 }}
                 transition={{ duration: 0.5, delay: index * 0.2 }}
@@ -143,7 +147,6 @@ const Stores = () => {
                     </span>
                   )}
                 </div>
-                
               </motion.div>
             ))}
           </div>
@@ -163,7 +166,8 @@ const Stores = () => {
             Get in Touch
           </h2>
           <p className="text-lg text-gray-700 max-w-2xl mx-auto leading-relaxed">
-            Curious about our collections or store experiences? Connect with our team to dive into the artistry of Laxmi fashion.
+            Curious about our collections or store experiences? Connect with our
+            team to dive into the artistry of Laxmi fashion.
           </p>
           <motion.button
             whileHover={{ scale: 1.05 }}
@@ -176,8 +180,6 @@ const Stores = () => {
           </motion.button>
         </motion.div>
       </section>
-
-      
 
       {/* Back to Top Button */}
       <motion.button

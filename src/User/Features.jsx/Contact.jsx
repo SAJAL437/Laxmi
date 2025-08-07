@@ -27,7 +27,8 @@ const Contact = () => {
     const newErrors = {};
     if (!formData.name.trim()) newErrors.name = "Name is required";
     if (!formData.email.trim()) newErrors.email = "Email is required";
-    else if (!/\S+@\S+\.\S+/.test(formData.email)) newErrors.email = "Email is invalid";
+    else if (!/\S+@\S+\.\S+/.test(formData.email))
+      newErrors.email = "Email is invalid";
     if (!formData.message.trim()) newErrors.message = "Message is required";
     return newErrors;
   };
@@ -55,26 +56,28 @@ const Contact = () => {
       <Navbar />
 
       {/* Hero Section */}
-      <section className="relative bg-cover bg-center h-[40rem] overflow-hidden">
-        <div className="max-w-7xl mx-auto h-full flex flex-col md:flex-row items-center justify-between px-4 md:px-8 lg:px-16">
+      <section className="relative bg-cover bg-center md:h-[40rem] overflow-hidden">
+        <div className="max-w-7xl mx-auto h-full flex flex-col md:flex-row items-center justify-between px-4 md:px-8 lg:px-16 mt-10 md:mt-0 pb-4">
           {/* Left Content */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
-            className="w-full md:w-1/2 text-left text-gray-900 z-10"
+            className="w-full md:w-1/2 text-left text-gray-900 z-10 px-2"
           >
             <h1 className="text-4xl md:text-6xl font-extrabold mb-4 tracking-tight drop-shadow-md font-serif">
               Connect with Laxmi
             </h1>
-            <p className="text-lg md:text-xl max-w-lg mb-6 text-gray-400 drop-shadow-md">
-              Reach out to our team for inquiries, styling advice, or to explore our exclusive collections. Let’s bring your fashion vision to life.
+            <p className="text-md md:text-xl max-w-lg mb-6 text-gray-400 drop-shadow-md">
+              Reach out to our team for inquiries, styling advice, or to explore
+              our exclusive collections. Let’s bring your fashion vision to
+              life.
             </p>
             <motion.a
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               href="#contact-form"
-              className="inline-block px-8 py-3 rounded-full font-semibold text-sm sm:text-base bg-gradient-to-r from-gray-950 to-gray-700 text-gray-100 cursor-pointer hover:from-gray-800 hover:to-gray-500 transition-all duration-300 shadow-lg"
+              className="inline-block px-8 py-3 rounded-2xl font-semibold text-sm sm:text-base bg-gradient-to-r from-gray-950 to-gray-700 text-gray-100 cursor-pointer hover:from-gray-800 hover:to-gray-500 transition-all duration-300 shadow-lg"
               aria-label="Contact us now"
             >
               Contact Now
@@ -85,14 +88,13 @@ const Contact = () => {
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="w-full md:w-1/2 h-[30rem] md:h-[35rem] flex items-center justify-center"
+            className="w-full md:w-1/2 sm:h-[25rem] md:h-[28rem] lg:h-[34rem] hidden md:flex items-center justify-center pb-10 sm:pb-0"
           >
-            <div className="relative w-full h-full my-5 sm:my-0">
+            <div className="relative w-full h-full ">
               <img
                 src="/contact.png"
                 alt="Laxmi Fashion Contact"
-                className="w-full h-full object-cover rounded-2xl shadow-2xl"
-                
+                className="w-full h-full object-cover object-center rounded-2xl shadow-2xl"
               />
               <div className="absolute inset-0 bg-gradient-to-r from-transparent to-indigo-900/40 rounded-2xl" />
             </div>
@@ -101,7 +103,10 @@ const Contact = () => {
       </section>
 
       {/* Contact Section */}
-      <section className="py-20 px-4 md:px-8 lg:px-16 bg-gradient-to-b from-indigo-100 to-purple-100 relative overflow-hidden" id="contact-form">
+      <section
+        className="py-20 px-4 md:px-8 lg:px-16 bg-gradient-to-b from-indigo-100 to-purple-100 relative overflow-hidden"
+        id="contact-form"
+      >
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1555529771-835f59fc5efe?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')] bg-cover bg-center opacity-10" />
         <div className="max-w-7xl mx-auto relative z-10">
           <motion.h2
@@ -142,7 +147,9 @@ const Contact = () => {
                     value={formData.name}
                     onChange={handleInputChange}
                     placeholder="Your Name"
-                    className={`w-full p-3 rounded-xl border ${errors.name ? "border-red-400" : "border-indigo-200"} focus:outline-none focus:ring-2 focus:ring-gray-500 text-gray-800 bg-white/50 transition-all duration-300`}
+                    className={`w-full p-3 rounded-xl border ${
+                      errors.name ? "border-red-400" : "border-indigo-200"
+                    } focus:outline-none focus:ring-2 focus:ring-gray-500 text-gray-800 bg-white/50 transition-all duration-300`}
                     aria-label="Your name"
                   />
                   {errors.name && (
@@ -157,7 +164,9 @@ const Contact = () => {
                     value={formData.email}
                     onChange={handleInputChange}
                     placeholder="Your Email"
-                    className={`w-full p-3 rounded-xl border ${errors.email ? "border-red-400" : "border-indigo-200"} focus:outline-none focus:ring-2 focus:ring-gray-500 text-gray-800 bg-white/50 transition-all duration-300`}
+                    className={`w-full p-3 rounded-xl border ${
+                      errors.email ? "border-red-400" : "border-indigo-200"
+                    } focus:outline-none focus:ring-2 focus:ring-gray-500 text-gray-800 bg-white/50 transition-all duration-300`}
                     aria-label="Your email"
                   />
                   {errors.email && (
@@ -172,11 +181,15 @@ const Contact = () => {
                     onChange={handleInputChange}
                     placeholder="Your Message"
                     rows="5"
-                    className={`w-full p-3 rounded-xl border ${errors.message ? "border-red-400" : "border-indigo-200"} focus:outline-none focus:ring-2 focus:ring-gray-500 text-gray-800 bg-white/50 transition-all duration-300`}
+                    className={`w-full p-3 rounded-xl border ${
+                      errors.message ? "border-red-400" : "border-indigo-200"
+                    } focus:outline-none focus:ring-2 focus:ring-gray-500 text-gray-800 bg-white/50 transition-all duration-300`}
                     aria-label="Your message"
                   ></motion.textarea>
                   {errors.message && (
-                    <p className="text-red-400 text-sm mt-1">{errors.message}</p>
+                    <p className="text-red-400 text-sm mt-1">
+                      {errors.message}
+                    </p>
                   )}
                 </div>
                 <motion.button
@@ -208,21 +221,22 @@ const Contact = () => {
               </h3>
               <div className="space-y-4">
                 <div className="flex items-center gap-2">
-                  <span className="text-blue-800"><MdEmail size={25} /></span>
-                  <p className="text-gray-600">
-                    support@laxmifashion.com
-                  </p>
+                  <span className="text-blue-800">
+                    <MdEmail size={25} />
+                  </span>
+                  <p className="text-gray-600">support@laxmifashion.com</p>
                   <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     onClick={() => copyToClipboard("support@laxmifashion.com")}
                     className="ml-2 text-purple-600 hover:text-purple-800"
                     aria-label="Copy email address"
-                  >
-                  </motion.button>
+                  ></motion.button>
                 </div>
                 <div className="flex items-center gap-2">
-                  <span className="text-green-600"><FaPhoneAlt size={25} /></span>
+                  <span className="text-green-600">
+                    <FaPhoneAlt size={25} />
+                  </span>
                   <p className="text-gray-600">+91 800 123 4567</p>
                   <motion.button
                     whileHover={{ scale: 1.05 }}
@@ -230,11 +244,12 @@ const Contact = () => {
                     onClick={() => copyToClipboard("+91 800 123 4567")}
                     className="ml-2 text-purple-600 hover:text-purple-800"
                     aria-label="Copy phone number"
-                  >
-                  </motion.button>
+                  ></motion.button>
                 </div>
                 <div className="flex items-start gap-2">
-                  <span className="text-red-600"><FaLocationDot size={25} /></span>
+                  <span className="text-red-600">
+                    <FaLocationDot size={25} />
+                  </span>
                   <p className="text-gray-600">
                     Laxmi Style Studio, 456 Connaught Place, New Delhi, DL
                   </p>
@@ -249,7 +264,7 @@ const Contact = () => {
                   className="text-gray-600 hover:text-gray-800 text-2xl bg-white/20 rounded-full p-2"
                   aria-label="Follow us on Twitter"
                 >
-                  <GrInstagram/>
+                  <GrInstagram />
                 </motion.a>
                 <motion.a
                   whileHover={{ scale: 1.2, rotate: 10 }}
@@ -259,7 +274,7 @@ const Contact = () => {
                   className="text-gray-600 hover:text-gray-800 text-2xl bg-white/20 rounded-full p-2"
                   aria-label="Follow us on Instagram"
                 >
-                  <FaFacebookSquare/>
+                  <FaFacebookSquare />
                 </motion.a>
                 <motion.a
                   whileHover={{ scale: 1.2, rotate: 10 }}
@@ -269,7 +284,7 @@ const Contact = () => {
                   className="text-gray-600 hover:text-gray-800 text-2xl bg-white/20 rounded-full p-2"
                   aria-label="Follow us on Facebook"
                 >
-                  <FaTwitter/>
+                  <FaTwitter />
                 </motion.a>
               </div>
             </motion.div>
