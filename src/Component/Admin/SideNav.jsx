@@ -11,7 +11,7 @@ import { FaTruckMoving } from "react-icons/fa6";
 import { HiCurrencyRupee } from "react-icons/hi2";
 import { IoMdAdd } from "react-icons/io";
 import { Navigate, NavLink, useNavigate } from "react-router-dom";
-import { logout } from "../../utils/Auth";
+import { logout } from "../../Utils/Auth";
 
 const adminLinks = [
   { icon: <RiDashboardHorizontalFill />, name: "Dashboard", to: "/admin" },
