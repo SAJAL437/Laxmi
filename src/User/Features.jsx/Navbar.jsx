@@ -412,7 +412,7 @@ export default function Navbar() {
                     </MenuItems>
                   </Menu>
                 ) : (
-                  <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6 border-2 border-blue-600 p-2 rounded-full">
+                  <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6 border-2 border-gray-600 p-2 rounded-full">
                     <Link
                       to="/signin"
                       className="text-sm font-medium text-gray-700 hover:text-gray-800 flex items-center"

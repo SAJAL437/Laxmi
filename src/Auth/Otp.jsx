@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { saveToken, getUserRoles } from "../Utils/Auth"; // Adjust the import path as needed
-
 
 const VerifyOTP = () => {
   const location = useLocation();
@@ -81,10 +80,10 @@ const VerifyOTP = () => {
     setErrors(newErrors);
   };
 
-  const BaseURL = 
-  import.meta.env.MODE === "development"
-    ? "http://localhost:2512"
-    : "https://laxmi-server-production.up.railway.app";
+  const BaseURL =
+    import.meta.env.MODE === "development"
+      ? "http://localhost:2512"
+      : "https://laxmi-server-production.up.railway.app";
 
   const handleVerifyOTP = async (e) => {
     e.preventDefault();
@@ -129,7 +128,8 @@ const VerifyOTP = () => {
       }
 
       setMessage(
-        response.data.message || "OTP verified successfully! Welcome to the shop."
+        response.data.message ||
+          "OTP verified successfully! Welcome to the shop."
       );
     } catch (err) {
       let errorMsg = "OTP verification failed";
@@ -192,9 +192,9 @@ const VerifyOTP = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-coral-100 to-teal-100 dark:from-gray-800 dark:to-gray-900">
-      <div className="max-w-md w-full bg-white dark:bg-gray-800 rounded-3xl shadow-2xl p-6 sm:p-8 transform hover:scale-105 transition-transform duration-300">
-        <h1 className="text-3xl sm:text-4xl font-extrabold text-center text-coral-600 dark:text-coral-400 mb-6">
+    <div className="sm:min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-100 to-gray-400 ">
+      <div className="sm:max-w-md w-full bg-white  sm:rounded-3xl shadow-2xl p-6 sm:p-8 transform hover:scale-105 transition-transform duration-300">
+        <h1 className="text-3xl sm:text-4xl font-extrabold font-serif text-center text-coral-600 dark:text-coral-400 mb-6">
           Verify Your OTP
         </h1>
         {message && (
@@ -211,7 +211,7 @@ const VerifyOTP = () => {
           <div>
             <label
               htmlFor="contact"
-              className="block text-sm font-medium text-gray-700 dark:text-gray-300"
+              className="block text-sm font-medium text-gray-700 "
             >
               Email or Phone
             </label>
@@ -224,7 +224,7 @@ const VerifyOTP = () => {
               onChange={handleChange}
               required
               disabled={loading || resendLoading}
-              className="mt-1 w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-300 focus:ring-2 focus:ring-coral-500 focus:border-coral-500 transition-transform duration-300 disabled:opacity-50"
+              className="mt-1 w-full px-4 py-3 rounded-lg border border-gray-300  focus:ring-gray-500 focus:border-gray-500 transition-transform duration-300 disabled:opacity-50"
               aria-invalid={errors.contact ? "true" : "false"}
               aria-describedby={errors.contact ? "contact-error" : undefined}
             />
@@ -240,7 +240,7 @@ const VerifyOTP = () => {
           <div>
             <label
               htmlFor="otp"
-              className="block text-sm font-medium text-gray-700 dark:text-gray-300"
+              className="block text-sm font-medium text-gray-700"
             >
               OTP Code
             </label>
@@ -253,7 +253,7 @@ const VerifyOTP = () => {
               onChange={handleChange}
               required
               disabled={loading || resendLoading}
-              className="mt-1 w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-300 focus:ring-2 focus:ring-coral-500 focus:border-coral-500 transition-transform duration-300 disabled:opacity-50"
+              className="mt-1 w-full px-4 py-3 rounded-lg border border-gray-300  focus:ring-gray-500 focus:border-gray-500 transition-transform duration-300 disabled:opacity-50"
               maxLength="6"
               inputMode="numeric"
               aria-invalid={errors.otp ? "true" : "false"}
@@ -272,7 +272,7 @@ const VerifyOTP = () => {
             type="button"
             onClick={handleVerifyOTP}
             disabled={loading || resendLoading}
-            className="w-full bg-gradient-to-r from-coral-600 to-teal-600 text-white font-semibold py-3 rounded-lg hover:from-teal-600 hover:to-coral-600 transition-all duration-300 disabled:opacity-50 flex items-center justify-center group"
+            className="w-full bg-gradient-to-r from-coral-600 to-gray-600 text-white font-semibold py-3 rounded-lg hover:from-gray-800 hover:to-coral-600 transition-all duration-300 disabled:opacity-50 flex items-center justify-center group cursor-pointer"
             aria-busy={loading}
           >
             {loading ? (
@@ -320,7 +320,7 @@ const VerifyOTP = () => {
             type="button"
             onClick={handleResendOTP}
             disabled={loading || resendLoading}
-            className="w-full bg-transparent border border-coral-600 text-coral-600 dark:text-coral-400 dark:border-coral-400 font-semibold py-2 rounded-lg hover:bg-coral-100 dark:hover:bg-gray-700 transition-all duration-300 disabled:opacity-50"
+            className="w-full bg-gradient-to-r from-coral-600 to-gray-600 text-white font-semibold py-3 rounded-lg hover:from-gray-800 hover:to-coral-600 transition-all duration-300 disabled:opacity-50 flex items-center justify-center group cursor-pointer"
             aria-busy={resendLoading}
           >
             {resendLoading ? (
@@ -368,12 +368,12 @@ const VerifyOTP = () => {
             </a>
           </p>
           <p className="mt-2">
-            <a
-              href="#"
-              className="text-teal-600 hover:underline dark:text-teal-400 font-medium"
+            <Link
+              to="/"
+              className="text-gray-600 hover:underline font-medium"
             >
               Back to Shop
-            </a>
+            </Link>
           </p>
         </div>
       </div>

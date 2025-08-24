@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { saveToken } from "../Utils/Auth"; // Adjust the import path as needed
 
 const Register = () => {
@@ -93,7 +93,6 @@ const Register = () => {
     import.meta.env.MODE === "development"
       ? "http://localhost:2512"
       : "https://laxmi-server-production.up.railway.app";
-  // const BaseURL = "http://localhost:2512";
 
   const handleSignUp = async (e) => {
     e.preventDefault();
@@ -103,14 +102,19 @@ const Register = () => {
     setLoading(true);
 
     try {
-      const response = await axios.post(`${BaseURL}/auth/signup`, {
+      const payload = {
         name: formData.name,
         contact: formData.contact,
         password: formData.password,
-        role: formData.role,
+      };
+      console.log("Sending payload:", payload);
+      const response = await axios.post(`${BaseURL}/auth/signup`, payload, {
+        headers: {
+          "Content-Type": "application/json",
+        },
       });
       if (response.data.token) {
-        saveToken(response.data.token); // Save signup token
+        saveToken(response.data.token);
         console.log("Signup token saved:", response.data.token);
       }
       setMessage(
@@ -126,7 +130,11 @@ const Register = () => {
         errorMsg =
           "Cannot connect to the server. Please ensure the backend is running.";
       } else if (err.response) {
-        errorMsg = err.response.data.message || err.response.statusText;
+        console.log("Server response:", err.response.data);
+        errorMsg =
+          err.response.data.message ||
+          err.response.data.error ||
+          err.response.statusText;
       } else {
         errorMsg = err.message;
       }
@@ -138,9 +146,9 @@ const Register = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-coral-100 to-teal-100 dark:from-gray-800 dark:to-gray-900">
-      <div className="max-w-md w-full bg-white dark:bg-gray-800 rounded-3xl shadow-2xl p-6 sm:p-8 transform hover:scale-105 transition-transform duration-300">
-        <h1 className="text-3xl sm:text-4xl font-extrabold text-center text-coral-600 dark:text-coral-400 mb-6">
+    <div className="sm:min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-100 to-gray-400 ">
+      <div className="sm:max-w-md w-full bg-white  sm:rounded-3xl shadow-2xl p-6 sm:p-8 transform hover:scale-105 transition-transform duration-300">
+        <h1 className="text-3xl sm:text-4xl font-extrabold font-serif text-center text-coral-600 dark:text-coral-400 mb-6">
           Join Our Shop
         </h1>
         {message && (
@@ -157,7 +165,7 @@ const Register = () => {
           <div>
             <label
               htmlFor="name"
-              className="block text-sm font-medium text-gray-700 dark:text-gray-300"
+              className="block text-sm font-medium text-gray-700 "
             >
               Full Name
             </label>
@@ -170,7 +178,7 @@ const Register = () => {
               onChange={handleChange}
               required
               disabled={loading}
-              className="mt-1 w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-300 focus:ring-2 focus:ring-coral-500 focus:border-coral-500 transition-transform duration-300 disabled:opacity-50"
+              className="mt-1 w-full px-4 py-3 rounded-lg border border-gray-300  focus:ring-gray-500 focus:border-gray-500 transition-transform duration-300 disabled:opacity-50"
               aria-invalid={errors.name ? "true" : "false"}
               aria-describedby={errors.name ? "name-error" : undefined}
             />
@@ -186,7 +194,7 @@ const Register = () => {
           <div>
             <label
               htmlFor="contact"
-              className="block text-sm font-medium text-gray-700 dark:text-gray-300"
+              className="block text-sm font-medium text-gray-700 "
             >
               Email or Phone
             </label>
@@ -199,7 +207,7 @@ const Register = () => {
               onChange={handleChange}
               required
               disabled={loading}
-              className="mt-1 w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-300 focus:ring-2 focus:ring-coral-500 focus:border-coral-500 transition-transform duration-300 disabled:opacity-50"
+              className="mt-1 w-full px-4 py-3 rounded-lg border border-gray-300  focus:ring-gray-500 focus:border-gray-500 transition-transform duration-300 disabled:opacity-50"
               aria-invalid={errors.contact ? "true" : "false"}
               aria-describedby={errors.contact ? "contact-error" : undefined}
             />
@@ -215,7 +223,7 @@ const Register = () => {
           <div>
             <label
               htmlFor="password"
-              className="block text-sm font-medium text-gray-700 dark:text-gray-300"
+              className="block text-sm font-medium text-gray-700 "
             >
               Password
             </label>
@@ -229,7 +237,7 @@ const Register = () => {
                 onChange={handleChange}
                 required
                 disabled={loading}
-                className="mt-1 w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-300 focus:ring-2 focus:ring-coral-500 focus:border-coral-500 transition-transform duration-300 disabled:opacity-50"
+                className="mt-1 w-full px-4 py-3 rounded-lg border border-gray-300  focus:ring-gray-500 focus:border-gray-500 transition-transform duration-300 disabled:opacity-50"
                 aria-invalid={errors.password ? "true" : "false"}
                 aria-describedby={
                   errors.password ? "password-error" : undefined
@@ -238,7 +246,7 @@ const Register = () => {
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500 dark:text-gray-300"
+                className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-600 "
                 aria-label={showPassword ? "Hide password" : "Show password"}
               >
                 {showPassword ? (
@@ -294,10 +302,10 @@ const Register = () => {
             )}
             {passwordStrength > 0 && (
               <div className="mt-2">
-                <p className="text-sm text-gray-700 dark:text-gray-300">
+                <p className="text-sm text-gray-700 ">
                   Password Strength
                 </p>
-                <div className="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-600">
+                <div className="w-full bg-gray-200 rounded-full h-2.5">
                   <div
                     className={`h-2.5 rounded-full transition-all duration-300 ${
                       passwordStrength <= 2
@@ -333,7 +341,7 @@ const Register = () => {
             type="button"
             onClick={handleSignUp}
             disabled={loading}
-            className="w-full bg-gradient-to-r from-coral-600 to-teal-600 text-white font-semibold py-3 rounded-lg hover:from-teal-600 hover:to-coral-600 transition-all duration-300 disabled:opacity-50 flex items-center justify-center group"
+            className="w-full bg-gradient-to-r from-coral-600 to-gray-600 text-white font-semibold py-3 rounded-lg hover:from-gray-800 hover:to-coral-600 transition-all duration-300 disabled:opacity-50 flex items-center justify-center group cursor-pointer"
             aria-busy={loading}
           >
             {loading ? (
@@ -396,12 +404,12 @@ const Register = () => {
             </a>
           </p>
           <p className="mt-2">
-            <a
-              href="/"
-              className="text-teal-600 hover:underline dark:text-teal-400 font-medium"
+            <Link
+              to="/"
+              className="text-gray-600 hover:underline  font-medium"
             >
               Back to Shop
-            </a>
+            </Link>
           </p>
         </div>
       </div>

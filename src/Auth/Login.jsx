@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { saveToken } from "../Utils/Auth";
+import { jwtDecode } from "jwt-decode";
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -81,10 +82,24 @@ const Login = () => {
         saveToken(response.data.token); // Save login token
         console.log("Login token saved:", response.data.token);
       }
+
+      const decoded = jwtDecode(response.data.token);
+
+      const roles = decoded.roles || decoded.authorities || [];
+
+      const roleStrings = roles.map((role) =>
+        typeof role === "string" ? role : role.authority
+      );
+
       setMessage(response.data.message || "Login successful!");
-      setTimeout(() => {
-        navigate("/"); // Redirect to dashboard or desired route
-      }, 1000);
+
+      if (roleStrings.includes("ROLE_ADMIN")) {
+        navigate("/admin");
+      } else {
+        setTimeout(() => {
+          navigate("/"); // Redirect to dashboard or desired route
+        }, 1000);
+      }
     } catch (err) {
       let errorMsg = "Login failed";
       if (err.code === "ERR_NETWORK") {
@@ -103,9 +118,9 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-coral-100 to-teal-100 dark:from-gray-800 dark:to-gray-900">
-      <div className="max-w-md w-full bg-white dark:bg-gray-800 rounded-3xl shadow-2xl p-6 sm:p-8 transform hover:scale-105 transition-transform duration-300">
-        <h1 className="text-3xl sm:text-4xl font-extrabold text-center text-coral-600 dark:text-coral-400 mb-6">
+    <div className="sm:min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-100 to-gray-400 ">
+      <div className="sm:max-w-md w-full bg-white  sm:rounded-3xl shadow-2xl p-6 sm:p-8 transform hover:scale-105 transition-transform duration-300">
+        <h1 className="text-3xl sm:text-4xl font-extrabold font-serif text-center text-coral-600 dark:text-coral-400 mb-6">
           Welcome Back
         </h1>
         {message && (
@@ -122,7 +137,7 @@ const Login = () => {
           <div>
             <label
               htmlFor="contact"
-              className="block text-sm font-medium text-gray-700 dark:text-gray-300"
+              className="block text-sm font-medium text-gray-700 "
             >
               Email or Phone
             </label>
@@ -135,7 +150,7 @@ const Login = () => {
               onChange={handleChange}
               required
               disabled={loading}
-              className="mt-1 w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-300 focus:ring-2 focus:ring-coral-500 focus:border-coral-500 transition-transform duration-300 disabled:opacity-50"
+              className="mt-1 w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600  focus:ring-gray-500 focus:border-gray-500 transition-transform duration-300 disabled:opacity-50"
               aria-invalid={errors.contact ? "true" : "false"}
               aria-describedby={errors.contact ? "contact-error" : undefined}
             />
@@ -151,7 +166,7 @@ const Login = () => {
           <div>
             <label
               htmlFor="password"
-              className="block text-sm font-medium text-gray-700 dark:text-gray-300"
+              className="block text-sm font-medium text-gray-700"
             >
               Password
             </label>
@@ -165,7 +180,7 @@ const Login = () => {
                 onChange={handleChange}
                 required
                 disabled={loading}
-                className="mt-1 w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-300 focus:ring-2 focus:ring-coral-500 focus:border-coral-500 transition-transform duration-300 disabled:opacity-50"
+                className="mt-1 w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600  focus:ring-gray-500 focus:border-gray-500 transition-transform duration-300 disabled:opacity-50"
                 aria-invalid={errors.password ? "true" : "false"}
                 aria-describedby={
                   errors.password ? "password-error" : undefined
@@ -174,7 +189,7 @@ const Login = () => {
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500 dark:text-gray-300"
+                className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500 "
                 aria-label={showPassword ? "Hide password" : "Show password"}
               >
                 {showPassword ? (
@@ -233,7 +248,7 @@ const Login = () => {
             type="button"
             onClick={handleSignIn}
             disabled={loading}
-            className="w-full bg-gradient-to-r from-coral-600 to-teal-600 text-white font-semibold py-3 rounded-lg hover:from-teal-600 hover:to-coral-600 transition-all duration-300 disabled:opacity-50 flex items-center justify-center group"
+            className="w-full bg-gradient-to-r from-coral-600 to-gray-600 text-white font-semibold py-3 rounded-lg hover:from-gray-800 hover:to-coral-600 transition-all duration-300 disabled:opacity-50 flex items-center justify-center group cursor-pointer"
             aria-busy={loading}
           >
             {loading ? (
@@ -278,23 +293,23 @@ const Login = () => {
             )}
           </button>
         </div>
-        <div className="mt-6 text-center text-sm text-gray-500 dark:text-gray-400">
+        <div className="mt-6 text-center text-sm text-gray-500 ">
           <p>
             Don't have an account?{" "}
-            <a
-              href="/signup"
+            <Link
+              to="/signup"
               className="text-coral-600 hover:underline dark:text-coral-400 font-medium"
             >
               Sign Up
-            </a>
+            </Link>
           </p>
           <p className="mt-2">
-            <a
-              href="#"
-              className="text-teal-600 hover:underline dark:text-teal-400 font-medium"
+            <Link
+              to="/"
+              className="text-gray-600 hover:underline  font-medium"
             >
               Back to Shop
-            </a>
+            </Link>
           </p>
         </div>
       </div>

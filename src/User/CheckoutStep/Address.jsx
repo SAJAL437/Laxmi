@@ -25,17 +25,73 @@ const Address = ({ data, step }) => {
 
   const isAuth = !!localStorage.getItem("jwt");
 
+  // Fetch user profile if authenticated
   useEffect(() => {
     if (isAuth && !user?.data?.id) {
       dispatch(getProfile());
     }
   }, [dispatch, isAuth, user]);
 
+  // Fetch current location and reverse geocode to full address
+  useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        async (position) => {
+          const { latitude, longitude } = position.coords;
+          const geolocation = `${latitude},${longitude}`;
+          setFormData((prev) => ({ ...prev, geolocation }));
+
+          try {
+            // Use OpenStreetMap Nominatim API for reverse geocoding
+            const response = await fetch(
+              `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}&zoom=18&addressdetails=1`
+            );
+            const data = await response.json();
+
+            if (data && data.address) {
+              const address = data.address;
+              setFormData((prev) => ({
+                ...prev,
+                streetAddress: address.road || address.street || "",
+                city: address.city || address.town || address.village || "",
+                state: address.state || "",
+                zipCode: address.postcode || "",
+              }));
+              setLocalError(null);
+            } else {
+              setLocalError(
+                "Unable to fetch address details. Please enter manually."
+              );
+            }
+          } catch (err) {
+            setLocalError(
+              "Failed to fetch address details. Please enter manually."
+            );
+          }
+        },
+        (err) => {
+          setLocalError(
+            err.message || "Unable to fetch location. Please enter manually."
+          );
+        },
+        {
+          enableHighAccuracy: true,
+          timeout: 10000,
+          maximumAge: 0,
+        }
+      );
+    } else {
+      setLocalError("Geolocation is not supported by this browser.");
+    }
+  }, []); // Empty dependency array to run once on mount
+
+  // Handle input changes
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -66,18 +122,19 @@ const Address = ({ data, step }) => {
     }
   };
 
+  // Handle navigation with selected address
   const handleNavigate = async (addressId) => {
     setIsSubmitting(true);
     setLocalError(null);
 
     try {
-      // Find the selected address from user.address
-      const selectedAddress = user?.address?.find((addr) => addr.id === addressId);
+      const selectedAddress = user?.address?.find(
+        (addr) => addr.id === addressId
+      );
       if (!selectedAddress) {
         throw new Error("Selected address not found.");
       }
 
-      // Create an order with the selected address
       const orderData = {
         name: selectedAddress.name,
         geolocation: selectedAddress.geolocation,
@@ -97,7 +154,9 @@ const Address = ({ data, step }) => {
         setLocalError("Failed to retrieve order ID.");
       }
     } catch (err) {
-      setLocalError(err.message || "Failed to create order with selected address.");
+      setLocalError(
+        err.message || "Failed to create order with selected address."
+      );
     } finally {
       setIsSubmitting(false);
     }
@@ -130,7 +189,7 @@ const Address = ({ data, step }) => {
                   <button
                     onClick={() => handleNavigate(addr.id)}
                     disabled={isSubmitting}
-                    className="mt-2 w-full rounded-md bg-indigo-600 px-4 py-2 text-sm sm:text-base font-semibold hover:bg-indigo-700 bg-gradient-to-r from-gray-950 to-gray-700 text-gray-100 cursor-pointer  font-serif hover:from-gray-800 hover:to-gray-500 transition-all duration-300 shadow-lg"
+                    className="mt-2 w-full rounded-md bg-indigo-600 px-4 py-2 text-sm sm:text-base font-semibold hover:bg-indigo-700 bg-gradient-to-r from-gray-950 to-gray-700 text-gray-100 cursor-pointer font-serif hover:from-gray-800 hover:to-gray-500 transition-all duration-300 shadow-lg"
                   >
                     {isSubmitting ? "Processing..." : "Proceed to Summary"}
                   </button>
@@ -143,7 +202,7 @@ const Address = ({ data, step }) => {
               <button
                 onClick={() => handleNavigate(data.id)}
                 disabled={isSubmitting}
-                className="mt-2 w-full rounded-md  px-4 py-2 text-sm sm:text-base font-semibold bg-indigo-600 bg-gradient-to-r from-gray-950 to-gray-700 text-gray-100 cursor-pointer hover:from-gray-800 font-serif hover:to-gray-500 transition-all duration-300 shadow-lg   "
+                className="mt-2 w-full rounded-md px-4 py-2 text-sm sm:text-base font-semibold bg-indigo-600 bg-gradient-to-r from-gray-950 to-gray-700 text-gray-100 cursor-pointer hover:from-gray-800 font-serif hover:to-gray-500 transition-all duration-300 shadow-lg"
               >
                 {isSubmitting ? "Processing..." : "Proceed to Summary"}
               </button>
@@ -194,7 +253,7 @@ const Address = ({ data, step }) => {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="w-full rounded-md bg-indigo-600 px-4 py-2 text-sm sm:text-base font-semibold hover:bg-indigo-700 bg-gradient-to-r from-gray-950 to-gray-700 text-gray-100 cursor-pointer hover:from-gray-800 hover:to-gray-500 transition-all duration-300 font-serif shadow-lg "
+            className="w-full rounded-md bg-indigo-600 px-4 py-2 text-sm sm:text-base font-semibold hover:bg-indigo-700 bg-gradient-to-r from-gray-950 to-gray-700 text-gray-100 cursor-pointer hover:from-gray-800 hover:to-gray-500 transition-all duration-300 font-serif shadow-lg"
           >
             {isSubmitting ? "Saving..." : "Save Address"}
           </button>

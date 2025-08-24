@@ -2,7 +2,7 @@ import { Route, Router, Routes } from "react-router-dom";
 import Register from "./Auth/Register";
 import Home from "./User/Hero/Home";
 import VerifyOTP from "./Auth/Otp";
-import UserPanel from "./User/UserPanel";
+// import UserPanel from "./User/UserPanel";
 import ProtectedRoute from "./Utils/ProtectedRoutes";
 import Login from "./Auth/Login";
 import CustomRouters from "./Router/CustomRouters";
@@ -10,6 +10,7 @@ import Footer from "./User/Features.jsx/Footer";
 import Company from "./User/Features.jsx/Company";
 import Stores from "./User/Features.jsx/Stores";
 import Contact from "./User/Features.jsx/Contact";
+import AdminPanel from "./Component/Admin/AdminPanel";
 
 const App = () => {
   return (
@@ -24,10 +25,10 @@ const App = () => {
         <Route path="/verify-otp" element={<VerifyOTP />} />
         <Route path="/*" element={<CustomRouters />} />
         <Route
-          path="/user/*"
+          path="/admin/*"
           element={
-            <ProtectedRoute allowedRoles={["ROLE_USER"]}>
-              <UserPanel />
+            <ProtectedRoute allowedRoles={["ROLE_ADMIN"]}>
+              <AdminPanel/>
             </ProtectedRoute>
           }
         />

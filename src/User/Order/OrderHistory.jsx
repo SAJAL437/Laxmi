@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { deleteOrder, orderHistory } from "../../Redux/User/Action/OrderAction";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { Avatar, AvatarGroup } from "@mui/material";
 
 const OrderHistory = () => {
   const navigate = useNavigate();
@@ -82,7 +83,9 @@ const OrderHistory = () => {
   return (
     <div className="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
       <div className="flex items-center justify-between mb-8">
-        <h2 className="text-3xl font-bold font-serif text-gray-900">Order History</h2>
+        <h2 className="text-3xl font-bold font-serif text-gray-900">
+          Order History
+        </h2>
       </div>
 
       {orders.length === 0 ? (
@@ -99,7 +102,7 @@ const OrderHistory = () => {
           </button>
         </div>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {orders.map((order) => {
             // Map orderItems to products
             const products = (order.orderItems || []).map((item) => ({
@@ -132,21 +135,23 @@ const OrderHistory = () => {
                   handleDetails(order.id);
                 }}
                 key={order.id}
-                className="bg-white border border-gray-200 rounded-xl p-4 sm:p-6 flex flex-row gap-4 shadow-md hover:shadow-xl transition-all duration-300"
+                className="bg-white border border-gray-200 rounded-xl p-4 sm:p-6 flex flex-col gap-4 shadow-md hover:shadow-xl transition-all duration-300"
                 role="article"
                 aria-labelledby={`order-${order.id}`}
               >
                 {/* Product Images - Horizontal Scroll */}
-                <div className="flex overflow-x-auto gap-4 pb-2 snap-x snap-mandatory">
-                  {products.map((product, index) => (
-                    <img
-                      key={`${order.id}-${index}`}
-                      src={product.image}
-                      alt={product.name}
-                      className="w-20 h-20 sm:w-24 sm:h-24 object-cover object-top rounded-md flex-shrink-0 snap-start transition-transform duration-200 hover:scale-105"
-                      loading="lazy"
-                    />
-                  ))}
+
+                <div className="relative overflow-hidden rounded-xl">
+                  <AvatarGroup max={3} sx={{ justifyContent: "start" }}>
+                    {order.orderItems.map((item) => (
+                      <Avatar
+                        key={item.id}
+                        alt={item.product.title}
+                        src={item.product.imageUrl}
+                        sx={{ width: 50, height: 50 }}
+                      />
+                    ))}
+                  </AvatarGroup>
                 </div>
 
                 {/* Order Details */}
@@ -156,6 +161,9 @@ const OrderHistory = () => {
                   </p>
                   <p className="text-sm text-gray-600">
                     Ordered: {formatDate(order.orderDate)}
+                  </p>
+                  <p className="text-sm text-gray-600">
+                    Delivery: {formatDate(order.deliveryDate)}
                   </p>
                   <div className="flex items-center gap-2 mt-2">
                     <p className="text-sm text-gray-500 line-through">

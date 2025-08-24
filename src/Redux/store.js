@@ -4,7 +4,9 @@ import productReducer from "./User/Reducer/productReducer";
 import productDetailsReducer from "./User/Reducer/productDetails";
 import CartReducer from "./User/Reducer/CartReducer";
 import OrderReducer from "./User/Reducer/OrderReducer";
-
+import AdminProductReducer from "./Admin/Reducer/AdminProductReducer";
+import AdminOrderReducer from "./Admin/Reducer/AdminOrderReducer";
+import AdminUserReducer from "./Admin/Reducer/AdminUserReducer";
 const store = configureStore({
   reducer: {
     user: UserProfile,
@@ -12,6 +14,9 @@ const store = configureStore({
     productDetails: productDetailsReducer,
     cart: CartReducer,
     order: OrderReducer,
+    Allproducts: AdminProductReducer,
+    AllOrders: AdminOrderReducer,
+    UserList: AdminUserReducer,
   },
 });
 

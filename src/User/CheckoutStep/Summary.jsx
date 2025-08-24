@@ -39,7 +39,9 @@ const Summary = ({ data }) => {
       {loading && (
         <div className="flex justify-center items-center py-8">
           <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-indigo-600"></div>
-          <p className="ml-3 text-gray-600 text-sm sm:text-base">Loading order details...</p>
+          <p className="ml-3 text-gray-600 text-sm sm:text-base">
+            Loading order details...
+          </p>
         </div>
       )}
       {error && (
@@ -105,7 +107,9 @@ const Summary = ({ data }) => {
                 ))}
               </div>
             ) : (
-              <p className="text-gray-600 text-sm sm:text-base">No items found.</p>
+              <p className="text-gray-600 text-sm sm:text-base">
+                No items found.
+              </p>
             )}
           </div>
 
